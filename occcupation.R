@@ -1,3 +1,5 @@
+#Usage example of code
+
 library(dplyr)
 library(lubridate)
 library(purrr)
@@ -33,38 +35,14 @@ df_weighted_mean <- weighted_mean_estimation(df_data, temporal_window, columns_o
 
 
 
-# Cambia los nombres de las columnas según tu dataframe
+# Name of colum with data you want to plot
 original_column <- "RoomA.People__amount"
-estimation_column <- "RoomA.People__amount_estimation"
-
-
-
-# Filtrar los datos para el 7 de noviembre de 2023 entre las 5:00 y las 23:00
-df_filtered <- df_weighted_mean %>%
-  filter(timestamp >= as.POSIXct("2023-11-06 05:55:00") & 
-           timestamp <= as.POSIXct("2023-11-06 23:00:00"))
-
-p <- ggplot(df_filtered, aes(x = timestamp)) +
-  geom_point(aes(y = !!sym(original_column)), color = "blue", size = 2, alpha = 0.5, shape = 16) +  # Puntos originales
-  #geom_line(aes(y = !!sym(estimation_column)), color = "green", size = 1) +  # Línea de estimación
-
-  labs(title = "Comparación de Datos Originales y Estimaciones",
-       x = "Fecha",
-       y = "Valores") +
-  theme_minimal(base_size = 15) +  # Tamaño de fuente base
-  theme(panel.background = element_rect(fill = "white"),  # Fondo blanco
-        plot.background = element_rect(fill = "white"),   # Fondo del gráfico
-        panel.grid.major = element_line(color = "grey90"), # Color de las líneas de la cuadrícula
-        panel.grid.minor = element_line(color = "grey95"),
-        legend.position = "none")+  # Eliminar la leyenda
-  scale_y_continuous(limits = c(0, 8))  # Forzar el eje Y de 0 a 8
-
-# Guardar la gráfica como un archivo PNG
-ggsave("grafica_estimaciones.png", plot = p, width = 10, height = 6, dpi = 300)
-
-
 
 plot_estimation(df_max, original_column = original_column, filename = "Test2")
+
+
+
+
 
 
 
