@@ -61,6 +61,7 @@ ggsave("grafica_estimaciones.png", plot = p, width = 10, height = 6, dpi = 300)
 
 
 
+plot_estimation(df_max, original_column = original_column)
 
 
 

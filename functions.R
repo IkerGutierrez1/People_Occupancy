@@ -164,3 +164,9 @@ weighted_mean_estimation <- function(df, temporal_window, columns_of_interest, w
   return (df_w)
   
 }
+
+
+plot_estimation <- function(df, original_column = "RoomA.People__amount"){
+  estimation_column = paste0(original_column,"_estimation")
+  print(estimation_column)
+}
