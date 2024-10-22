@@ -35,13 +35,13 @@ max_estimation <- function(df, temporal_window, columns_of_interest){
   #a new column is create for each colum un columns of interest, the new columns have
   #the samen name + _estimation
   
-  df_w <- data %>%
+  df_w <- df %>%
     arrange(timestamp) %>%
     mutate(across(all_of(columns_of_interest), 
                   .fns = list(estimation = ~ map_dbl(timestamp, 
                                                          ~ {
                                                            # Filtra los valores dentro de la ventana de tiempo
-                                                           relevant_values <- data[[cur_column()]][
+                                                           relevant_values <- df[[cur_column()]][
                                                              timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
                                                                timestamp < (.x + minutes(floor(temporal_window / 2)))
                                                            ]
@@ -67,13 +67,13 @@ rounded_mean_estimation <- function(df, temporal_window, columns_of_interest){
   #a new column is create for each colum un columns of interest, the new columns have
   #the samen name + _estimation
   
-  df_w <- data %>%
+  df_w <- df %>%
     arrange(timestamp) %>%
     mutate(across(all_of(columns_of_interest), 
                   .fns = list(estimation = ~ map_dbl(timestamp, 
                                                      ~ {
                                                        # Filtra los valores dentro de la ventana de tiempo
-                                                       relevant_values <- data[[cur_column()]][
+                                                       relevant_values <- df[[cur_column()]][
                                                          timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
                                                            timestamp < (.x + minutes(floor(temporal_window / 2)))
                                                        ]
@@ -99,13 +99,13 @@ mean_estimation <- function(df, temporal_window, columns_of_interest){
   #a new column is create for each colum un columns of interest, the new columns have
   #the samen name + _estimation
   
-  df_w <- data %>%
+  df_w <- df %>%
     arrange(timestamp) %>%
     mutate(across(all_of(columns_of_interest), 
                   .fns = list(estimation = ~ map_dbl(timestamp, 
                                               ~ {
                                                 # Filtra los valores dentro de la ventana de tiempo
-                                                relevant_values <- data[[cur_column()]][
+                                                relevant_values <- df[[cur_column()]][
                                                   timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
                                                     timestamp < (.x + minutes(floor(temporal_window / 2)))
                                                 ]
