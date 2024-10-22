@@ -6,7 +6,6 @@ library(ggplot2)
 path <- "data/data.csv"
 df_data <- load_data(path = path)
 
-#Añadiendo algo
 
 #Parameters for all estimations
 temporal_window <- 60
