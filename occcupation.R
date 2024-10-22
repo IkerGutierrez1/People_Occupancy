@@ -6,6 +6,8 @@ library(ggplot2)
 path <- "data/data.csv"
 df_data <- load_data(path = path)
 
+#Añadiendo algo
+
 #Parameters for all estimations
 temporal_window <- 60
 columns_of_interest <- c("RoomA.People__amount","RoomA.Room__active") 
