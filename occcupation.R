@@ -3,6 +3,9 @@ library(lubridate)
 library(purrr)
 library(ggplot2)
 
+#Load functions
+source("functions.R")
+
 path <- "data/data.csv"
 df_data <- load_data(path = path)
 
@@ -61,7 +64,7 @@ ggsave("grafica_estimaciones.png", plot = p, width = 10, height = 6, dpi = 300)
 
 
 
-plot_estimation(df_max, original_column = original_column)
+plot_estimation(df_max, original_column = original_column, filename = "Test2")
 
 
 

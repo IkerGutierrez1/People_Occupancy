@@ -166,7 +166,41 @@ weighted_mean_estimation <- function(df, temporal_window, columns_of_interest, w
 }
 
 
-plot_estimation <- function(df, original_column = "RoomA.People__amount"){
+plot_estimation <- function(df, original_column = "RoomA.People__amount", save_dir = "output/graphs",
+                            filename, start_time = NULL, end_time = NULL){
+  #Function for ploting the estimation and original observations vs time, original column is the original observations
+  #start and end times are optional and the function will take all the range in dateframe if not specified
   estimation_column = paste0(original_column,"_estimation")
-  print(estimation_column)
+  filepath = paste0(save_dir,"/",filename,".png")
+  print(filepath)
+  
+  if (is.null(start_time)) {
+    start_time <- as.POSIXct(min(df$timestamp, na.rm = TRUE))
+  }
+  if (is.null(end_time)) {
+    end_time <- as.POSIXct(max(df$timestamp, na.rm = TRUE))
+  }
+  
+  # Filtrar los datos para el 7 de noviembre de 2023 entre las 5:00 y las 23:00
+  df <- df %>%
+    filter(timestamp >= as.POSIXct(start_time) & 
+             timestamp <= as.POSIXct(end_time))
+  
+  p <- ggplot(df, aes(x = timestamp)) +
+    geom_point(aes(y = !!sym(original_column)), color = "blue", size = 2, alpha = 0.5, shape = 16) +  # Puntos originales
+    geom_line(aes(y = !!sym(estimation_column)), color = "green", linewidth = 1) +  # Línea de estimación
+    
+    labs(title = "Comparación de Datos Originales y Estimaciones",
+         x = "Fecha",
+         y = "Valores") +
+    theme_minimal(base_size = 15) +  # Tamaño de fuente base
+    theme(panel.background = element_rect(fill = "white"),  # Fondo blanco
+          plot.background = element_rect(fill = "white"),   # Fondo del gráfico
+          panel.grid.major = element_line(color = "grey90"), # Color de las líneas de la cuadrícula
+          panel.grid.minor = element_line(color = "grey95"),
+          legend.position = "none")+  # Eliminar la leyenda
+    scale_y_continuous(limits = c(0, 8))  # Forzar el eje Y de 0 a 8
+  
+  # Guardar la gráfica como un archivo PNG
+  ggsave(filepath, plot = p, width = 10, height = 6, dpi = 300)
 }
