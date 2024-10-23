@@ -191,15 +191,15 @@ plot_estimation <- function(df, original_column = "RoomA.People__amount", save_d
     geom_line(aes(y = !!sym(estimation_column)), color = "green", linewidth = 1) +  # Línea de estimación
     
     labs(title = "Comparación de Datos Originales y Estimaciones",
-         x = "Fecha",
-         y = "Valores") +
+         x = "Date",
+         y = "Occupation") +
     theme_minimal(base_size = 15) +  # Tamaño de fuente base
     theme(panel.background = element_rect(fill = "white"),  # Fondo blanco
           plot.background = element_rect(fill = "white"),   # Fondo del gráfico
           panel.grid.major = element_line(color = "grey90"), # Color de las líneas de la cuadrícula
           panel.grid.minor = element_line(color = "grey95"),
           legend.position = "none")+  # Eliminar la leyenda
-    scale_y_continuous(limits = c(0, 8))  # Forzar el eje Y de 0 a 8
+    scale_y_continuous(limits = c(0, 8))  
   
   # Guardar la gráfica como un archivo PNG
   ggsave(filepath, plot = p, width = 10, height = 6, dpi = 300)

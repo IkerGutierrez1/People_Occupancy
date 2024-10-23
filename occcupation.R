@@ -38,7 +38,12 @@ df_weighted_mean <- weighted_mean_estimation(df_data, temporal_window, columns_o
 # Name of colum with data you want to plot
 original_column <- "RoomA.People__amount"
 
-plot_estimation(df_max, original_column = original_column, filename = "Test2")
+start_time <- as.POSIXct("2023-11-06 05:00")
+end_time <- as.POSIXct("2023-11-06 23:00")
+
+
+plot_estimation(df_weighted_mean, original_column = original_column, filename = "Test2",
+                start_time = start_time, end_time = end_time)
 
 
 
