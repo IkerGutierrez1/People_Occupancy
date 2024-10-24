@@ -15,6 +15,6 @@ The repository has two .R files:
 - functions.R with all the functions used for the project
 - occupation.R with an example of usage of the functinos
 
-  data folder contains the .csv obtain from Zenodo, in this case only for one week with the relevant columns.
+data folder contains the .csv obtain from Zenodo, the data was processed to only have data from one week to create the plots.
 
-  output contains the resulting dataframe and plots of the data and different methods.
+output contains the resulting dataframe and plots of the data and different methods.
