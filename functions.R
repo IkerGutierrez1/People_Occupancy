@@ -204,3 +204,29 @@ plot_estimation <- function(df, original_column = "RoomA.People__amount", save_d
   # Guardar la gráfica como un archivo PNG
   ggsave(filepath, plot = p, width = 10, height = 6, dpi = 300)
 }
+
+save_df <- function(df, save_dir = "output/", df_name){
+  #Function to save the dataframe, it replaces the data in the columns that have been estimated
+  #with the estiamtion data, deleting the _estimation cols and replacing original data with estimte
+  file_path = paste0(save_dir,df_name,".csv")
+  
+  #All cols with _estimation
+  cols_estimation <- names(df_max)[grep("_estimation", names(df_max))]
+  
+  #Cols with original data to be replaced by cols_esimation
+  cols_delete <- gsub("_estimation$", "", cols_estimation)
+  
+  print("Replacing data in:")
+  print(cols_delete)
+  print("with:")
+  print(cols_estimation)
+  
+  # Replaced data that has been estimated
+  df <- df %>%
+    select(-all_of(cols_delete)) %>% 
+    #rename_with(~ gsub("_estimation$", "", .), ends_with("_estimation")) %>% #Esto ultimo cambiar
+    rename_with(~ gsub("_estimation$", "", .), cols_estimation) %>% #Esto ultimo cambiar
+    select(-ends_with("_estimation"))
+  
+  write.csv(df, file_path, row.names = FALSE)
+}
