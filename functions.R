@@ -40,18 +40,18 @@ max_estimation <- function(df, temporal_window, columns_of_interest){
     mutate(across(all_of(columns_of_interest), 
                   .fns = list(estimation = ~ map_dbl(timestamp, 
                                                          ~ {
-                                                           # Filtra los valores dentro de la ventana de tiempo
+                                                           
                                                            relevant_values <- df[[cur_column()]][
                                                              timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
                                                                timestamp < (.x + minutes(floor(temporal_window / 2)))
                                                            ]
                                                            
-                                                           # Asegúrate de que solo consideramos valores numéricos y no NA
+                                                           
                                                            relevant_values <- relevant_values[!is.na(relevant_values)]
                                                            
-                                                           # Calcula el máximo si hay valores válidos
+                                                      
                                                            if (length(relevant_values) == 0) {
-                                                             return(NA_real_)  # Devuelve NA si no hay valores válidos
+                                                             return(NA_real_)  
                                                            } else {
                                                              return(max(relevant_values, na.rm = TRUE))
                                                            }
@@ -72,18 +72,18 @@ rounded_mean_estimation <- function(df, temporal_window, columns_of_interest){
     mutate(across(all_of(columns_of_interest), 
                   .fns = list(estimation = ~ map_dbl(timestamp, 
                                                      ~ {
-                                                       # Filtra los valores dentro de la ventana de tiempo
+                                                       
                                                        relevant_values <- df[[cur_column()]][
                                                          timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
                                                            timestamp < (.x + minutes(floor(temporal_window / 2)))
                                                        ]
                                                        
-                                                       # Asegúrate de que solo consideramos valores numéricos y no NA
+                                                      
                                                        relevant_values <- relevant_values[!is.na(relevant_values)]
                                                        
-                                                       # Calcula el máximo si hay valores válidos
+                                                      
                                                        if (length(relevant_values) == 0) {
-                                                         return(NA_real_)  # Devuelve NA si no hay valores válidos
+                                                         return(NA_real_)  
                                                        } else {
                                                          return(round(mean(relevant_values, na.rm = TRUE)))
                                                        }
@@ -104,18 +104,18 @@ mean_estimation <- function(df, temporal_window, columns_of_interest){
     mutate(across(all_of(columns_of_interest), 
                   .fns = list(estimation = ~ map_dbl(timestamp, 
                                               ~ {
-                                                # Filtra los valores dentro de la ventana de tiempo
+                                                
                                                 relevant_values <- df[[cur_column()]][
                                                   timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
                                                     timestamp < (.x + minutes(floor(temporal_window / 2)))
                                                 ]
                                                 
-                                                # Asegúrate de que solo consideramos valores numéricos y no NA
+                                                
                                                 relevant_values <- relevant_values[!is.na(relevant_values)]
                                                 
-                                                # Calcula el máximo si hay valores válidos
+                                               
                                                 if (length(relevant_values) == 0) {
-                                                  return(NA_real_)  # Devuelve NA si no hay valores válidos
+                                                  return(NA_real_)  
                                                 } else {
                                                   return(mean(relevant_values, na.rm = TRUE))
                                                 }
@@ -139,22 +139,22 @@ weighted_mean_estimation <- function(df, temporal_window, columns_of_interest, w
     mutate(across(all_of(columns_of_interest), 
                   .fns = list(estimation = ~ map_dbl(timestamp, 
                                                      ~ {
-                                                       # Filtra los valores dentro de la ventana de tiempo
+                                                       
                                                        relevant_values <- df[[cur_column()]][
                                                          timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
                                                            timestamp < (.x + minutes(floor(temporal_window / 2)))
                                                        ]
                                                        
-                                                       # Obtener el índice de la columna actual
+                                                       
                                                        col_index <- which(columns_of_interest == cur_column())
                                                        unique_values <- unique_values_list[[col_index]]
                                                        weights <- weights_list[[col_index]]
                                                        
-                                                       # Asignar pesos a los valores relevantes
+                                                       
                                                        w <- weights[match(relevant_values, unique_values)]
                                                        w[is.na(w)] <- 0
                                                        
-                                                       # Calcular la media ponderada
+                                                       
                                                        if (length(relevant_values) > 0 && all(!is.na(w))) {
                                                          return(weighted.mean(relevant_values, w, na.rm = TRUE))  
                                                        } else {
@@ -181,27 +181,25 @@ plot_estimation <- function(df, original_column = "RoomA.People__amount", save_d
     end_time <- as.POSIXct(max(df$timestamp, na.rm = TRUE))
   }
   
-  # Filtrar los datos para el 7 de noviembre de 2023 entre las 5:00 y las 23:00
   df <- df %>%
     filter(timestamp >= as.POSIXct(start_time) & 
              timestamp <= as.POSIXct(end_time))
   
   p <- ggplot(df, aes(x = timestamp)) +
-    geom_point(aes(y = !!sym(original_column)), color = "blue", size = 2, alpha = 0.5, shape = 16) +  # Puntos originales
-    geom_line(aes(y = !!sym(estimation_column)), color = "green", linewidth = 1) +  # Línea de estimación
+    geom_point(aes(y = !!sym(original_column)), color = "blue", size = 2, alpha = 0.5, shape = 16) +  
+    geom_line(aes(y = !!sym(estimation_column)), color = "green", linewidth = 1) +  
     
-    labs(title = "Comparación de Datos Originales y Estimaciones",
+    labs(title = "Original data vs estimation",
          x = "Date",
          y = "Occupation") +
-    theme_minimal(base_size = 15) +  # Tamaño de fuente base
-    theme(panel.background = element_rect(fill = "white"),  # Fondo blanco
-          plot.background = element_rect(fill = "white"),   # Fondo del gráfico
-          panel.grid.major = element_line(color = "grey90"), # Color de las líneas de la cuadrícula
+    theme_minimal(base_size = 15) +  
+    theme(panel.background = element_rect(fill = "white"),  
+          plot.background = element_rect(fill = "white"),   
+          panel.grid.major = element_line(color = "grey90"), 
           panel.grid.minor = element_line(color = "grey95"),
-          legend.position = "none")+  # Eliminar la leyenda
+          legend.position = "none")+  
     scale_y_continuous(limits = c(0, 8))  
   
-  # Guardar la gráfica como un archivo PNG
   ggsave(filepath, plot = p, width = 10, height = 6, dpi = 300)
 }
 
@@ -224,9 +222,6 @@ save_df <- function(df, save_dir = "output/", df_name){
   # Replaced data that has been estimated
   df <- df %>%
     select(-all_of(cols_delete)) %>% 
-    #rename_with(~ gsub("_estimation$", "", .), ends_with("_estimation")) %>% #Esto ultimo cambiar
-    rename_with(~ gsub("_estimation$", "", .), cols_estimation) %>% #Esto ultimo cambiar
-    select(-ends_with("_estimation"))
-  
+    rename_with(~ gsub("_estimation$", "", .), cols_estimation) 
   write.csv(df, file_path, row.names = FALSE)
 }
