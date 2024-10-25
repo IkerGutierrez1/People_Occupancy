@@ -10,9 +10,20 @@ The data was collected from six office in Aalborg University in Denmark from Feb
 
 [añade la referencia completa] ?
 
-The dataset was obtained from: [Zenodo](https://zenodo.org/doi/10.5281/zenodo.10039896)
+The dataset was obtained from:
+S. P. Melgaard, «A Danish high-resolution dataset for six office rooms with occupancy, indoor environment , heating, ventilation, lighting and room control monitoring», Data in Brief, vol. 54. Zenodo, p. 110326, feb. 21, 2024. doi: 10.5281/zenodo.10673763.
+[Zenodo](https://zenodo.org/doi/10.5281/zenodo.10039896)
 
-The data is documented in: [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2352340924002956?via%3Dihub)
+The data is documented in: 
+Olfa Mejri, Elena Palomo Del Barrio, Nadia Ghrab-Morcos,
+Energy performance assessment of occupied buildings using model identification techniques,
+Energy and Buildings,
+Volume 43, Issues 2–3,
+2011,
+Pages 285-299,
+ISSN 0378-7788,
+https://doi.org/10.1016/j.enbuild.2010.09.010.
+[ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2352340924002956?via%3Dihub)
 
 ## [smoothing approach]
 
