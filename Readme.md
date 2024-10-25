@@ -8,11 +8,13 @@ This repository contains a R project used for smoothing the data of room occupat
 
 The data was collected from six office in Aalborg University in Denmark from February 2023 to December 2023. It has a frecuency of five minutes and contains measurments of occupany, ventilation, heating, lighting and general enviromental factors. The dataset contains data from six office rooms
 
-[añade la referencia completa] ?
+[añade la referencia completa]
 
 The dataset was obtained from:
-S. P. Melgaard, «A Danish high-resolution dataset for six office rooms with occupancy, indoor environment , heating, ventilation, lighting and room control monitoring», Data in Brief, vol. 54. Zenodo, p. 110326, feb. 21, 2024. doi: 10.5281/zenodo.10673763.
-[Zenodo](https://zenodo.org/doi/10.5281/zenodo.10039896)
+Melgaard, S. P., Johra, H., Nyborg, V. Ø., Marszal-Pomianowska, A., Jensen, R. L., Kantas, C., Larsen, O. K., Hu, Y., Frandsen, K. M., Larsen, T. S., Svidt, K., Andersen, K. H., Leiria, D., Schaffer, M., Frandsen, M., Veit, M., Ussing, L. F., Lindhard, S. M., Pomianowski, M. Z., … Heiselberg, P. K. (2024). 
+A Danish high-resolution dataset for six office rooms with occupancy, indoor environment , heating, ventilation, lighting and room control monitoring [Data set]. 
+En Data in Brief (Versión v3, Vol. 54, p. 110326). 
+Zenodo. https://doi.org/10.5281/zenodo.10673763
 
 The data is documented in: 
 Olfa Mejri, Elena Palomo Del Barrio, Nadia Ghrab-Morcos,
@@ -23,7 +25,7 @@ Volume 43, Issues 2–3,
 Pages 285-299,
 ISSN 0378-7788,
 https://doi.org/10.1016/j.enbuild.2010.09.010.
-[ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2352340924002956?via%3Dihub)
+
 
 ## [smoothing approach]
 
