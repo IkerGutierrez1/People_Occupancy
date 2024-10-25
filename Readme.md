@@ -6,7 +6,9 @@ This repository contains a R project used for smoothing the data of room occupat
 
 [METE ALGO DE INFORMACIÓN SOBRE EL DATASET, UN PÁRRAFO DE 3-4 LÍNEAS CON LA INFO BÁSICA: Tipo de edificio, ubicación geográfica, número de habitaciones, frecuencia de muestreo]
 
-[añade la referencia completa]
+The data was collected from six office in Aalborg University in Denmark from February 2023 to December 2023. It has a frecuency of five minutes and contains measurments of occupany, ventilation, heating, lighting and general enviromental factors.
+
+[añade la referencia completa] ?
 
 The dataset was obtained from: [Zenodo](https://zenodo.org/doi/10.5281/zenodo.10039896)
 
@@ -16,6 +18,9 @@ The data is documented in: [ScienceDirect](https://www.sciencedirect.com/science
 
 [Añadir una sección en la que presentas las distintas fórmulas, idem que en el paper, pero añadiendo el nombre exacto de las funciones y sus datos de entrada y salida]
 
+In the script there are functions to perform four different smoothing methods, all of them perform some operation with the values inside a time interval around the point:
+
+- max_estimation <- function(df, temporal_window, columns_of_interest), the point is smoothed out to the maximum value of the interval. df is the dataframe with data, temporal window is the length of the interval (It is centered around the point, it spans from t-temporal_window/2 to t+temporal_window/2). columns_of_interest is a list with the names of the columns to be smoothed. It returns a dataframe with the original columns and new columns ending in _estimation for all the columns in columns_of_interest.
 ## Repository structure
 
 [INDICARLO DE FORMA MÁS ORDENADA
