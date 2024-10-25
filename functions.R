@@ -30,8 +30,8 @@ load_data <- function(path){
 }
 
 
-max_estimation <- function(df, temporal_window, columns_of_interest){
-  #Function that calculates the maximum value of the given temporal_window
+max_estimation <- function(df, aggregation_period, columns_of_interest){
+  #Function that calculates the maximum value of the given aggregation_period
   #a new column is create for each colum un columns of interest, the new columns have
   #the samen name + _estimation
   
@@ -42,8 +42,8 @@ max_estimation <- function(df, temporal_window, columns_of_interest){
                                                          ~ {
                                                            
                                                            relevant_values <- df[[cur_column()]][
-                                                             timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
-                                                               timestamp < (.x + minutes(floor(temporal_window / 2)))
+                                                             timestamp >= (.x - minutes(floor(aggregation_period / 2))) & 
+                                                               timestamp < (.x + minutes(floor(aggregation_period / 2)))
                                                            ]
                                                            
                                                            
@@ -62,8 +62,8 @@ max_estimation <- function(df, temporal_window, columns_of_interest){
 }
 
 
-rounded_mean_estimation <- function(df, temporal_window, columns_of_interest){
-  #Function that calculates the rounded mean value of the given temporal_window
+rounded_mean_estimation <- function(df, aggregation_period, columns_of_interest){
+  #Function that calculates the rounded mean value of the given aggregation_period
   #a new column is create for each colum un columns of interest, the new columns have
   #the samen name + _estimation
   
@@ -74,8 +74,8 @@ rounded_mean_estimation <- function(df, temporal_window, columns_of_interest){
                                                      ~ {
                                                        
                                                        relevant_values <- df[[cur_column()]][
-                                                         timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
-                                                           timestamp < (.x + minutes(floor(temporal_window / 2)))
+                                                         timestamp >= (.x - minutes(floor(aggregation_period / 2))) & 
+                                                           timestamp < (.x + minutes(floor(aggregation_period / 2)))
                                                        ]
                                                        
                                                       
@@ -94,8 +94,8 @@ rounded_mean_estimation <- function(df, temporal_window, columns_of_interest){
 }
 
 
-mean_estimation <- function(df, temporal_window, columns_of_interest){
-  #Function that calculates the mean value of the given temporal_window
+mean_estimation <- function(df, aggregation_period, columns_of_interest){
+  #Function that calculates the mean value of the given aggregation_period
   #a new column is create for each colum un columns of interest, the new columns have
   #the samen name + _estimation
   
@@ -106,8 +106,8 @@ mean_estimation <- function(df, temporal_window, columns_of_interest){
                                               ~ {
                                                 
                                                 relevant_values <- df[[cur_column()]][
-                                                  timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
-                                                    timestamp < (.x + minutes(floor(temporal_window / 2)))
+                                                  timestamp >= (.x - minutes(floor(aggregation_period / 2))) & 
+                                                    timestamp < (.x + minutes(floor(aggregation_period / 2)))
                                                 ]
                                                 
                                                 
@@ -126,8 +126,8 @@ mean_estimation <- function(df, temporal_window, columns_of_interest){
 }
 
 
-weighted_mean_estimation <- function(df, temporal_window, columns_of_interest, weights_list, unique_values_list) {
-  # Function that calculates the weighted mean value of the given temporal_window
+weighted_mean_estimation <- function(df, aggregation_period, columns_of_interest, weights_list, unique_values_list) {
+  # Function that calculates the weighted mean value of the given aggregation_period
   # A new column is created for each column in columns_of_interest, 
   # the new columns have the same name + "_estimation"
   #The wights and unique values list need to be in the same order as columns of intrest, 
@@ -141,8 +141,8 @@ weighted_mean_estimation <- function(df, temporal_window, columns_of_interest, w
                                                      ~ {
                                                        
                                                        relevant_values <- df[[cur_column()]][
-                                                         timestamp >= (.x - minutes(floor(temporal_window / 2))) & 
-                                                           timestamp < (.x + minutes(floor(temporal_window / 2)))
+                                                         timestamp >= (.x - minutes(floor(aggregation_period / 2))) & 
+                                                           timestamp < (.x + minutes(floor(aggregation_period / 2)))
                                                        ]
                                                        
                                                        
