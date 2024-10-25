@@ -6,7 +6,7 @@ This repository contains a R project used for smoothing the data of room occupat
 
 [METE ALGO DE INFORMACIÓN SOBRE EL DATASET, UN PÁRRAFO DE 3-4 LÍNEAS CON LA INFO BÁSICA: Tipo de edificio, ubicación geográfica, número de habitaciones, frecuencia de muestreo]
 
-The data was collected from six office in Aalborg University in Denmark from February 2023 to December 2023. It has a frecuency of five minutes and contains measurments of occupany, ventilation, heating, lighting and general enviromental factors.
+The data was collected from six office in Aalborg University in Denmark from February 2023 to December 2023. It has a frecuency of five minutes and contains measurments of occupany, ventilation, heating, lighting and general enviromental factors. The dataset contains data from six office rooms
 
 [añade la referencia completa] ?
 
