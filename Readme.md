@@ -17,14 +17,14 @@ En Data in Brief (Versión v3, Vol. 54, p. 110326).
 Zenodo. https://doi.org/10.5281/zenodo.10673763
 
 The data is documented in: 
-Olfa Mejri, Elena Palomo Del Barrio, Nadia Ghrab-Morcos,
-Energy performance assessment of occupied buildings using model identification techniques,
-Energy and Buildings,
-Volume 43, Issues 2–3,
-2011,
-Pages 285-299,
-ISSN 0378-7788,
-https://doi.org/10.1016/j.enbuild.2010.09.010.
+Simon Pommerencke Melgaard, Hicham Johra, Victor Ørsøe Nyborg, Anna Marszal-Pomianowska, Rasmus Lund Jensen, Christos Kantas, Olena Kalyanova Larsen, Yue Hu, Kirstine Meyer Frandsen, Tine Steen Larsen, Kjeld Svidt, Kamilla Heimar Andersen, Daniel Leiria, Markus Schaffer, Martin Frandsen, Martin Veit, Lene Faber Ussing, Søren Munch Lindhard, Michal Zbigniew Pomianowski, Lasse Rohde, Anders Rhiger Hansen, Per Kvols Heiselberg,
+Detailed operational building data for six office rooms in Denmark: Occupancy, indoor environment, heating, ventilation, lighting and room control monitoring with sub-hourly temporal resolution,
+Data in Brief,
+Volume 54,
+2024,
+110326,
+ISSN 2352-3409,
+https://doi.org/10.1016/j.dib.2024.110326.
 
 
 ## [smoothing approach]
