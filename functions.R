@@ -209,7 +209,7 @@ save_df <- function(df, save_dir = "output/", df_name){
   file_path = paste0(save_dir,df_name,".csv")
   
   #All cols with _estimation
-  cols_estimation <- names(df_max)[grep("_estimation", names(df_max))]
+  cols_estimation <- names(df)[grep("_estimation", names(df))]
   
   #Cols with original data to be replaced by cols_esimation
   cols_delete <- gsub("_estimation$", "", cols_estimation)
