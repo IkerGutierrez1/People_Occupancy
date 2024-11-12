@@ -1,9 +1,6 @@
 #Usage example of code
 
-library(dplyr)
-library(lubridate)
-library(purrr)
-library(ggplot2)
+
 
 #Load functions
 source("functions.R")
@@ -32,17 +29,17 @@ df_rounded_mean <- rounded_mean_estimation(df_data, aggregation_period, columns_
 df_mean <- mean_estimation(df_data, aggregation_period, columns_of_interest)
 df_weighted_mean <- weighted_mean_estimation(df_data, aggregation_period, columns_of_interest,
                                              w_list,unique_value_list)
-
+df_spline <- spline_mean_estimation(df_data,aggregation_period,columns_of_interest)
 
 
 # Name of colum with data you want to plot
 original_column <- "RoomA.People__amount"
 
-start_time <- as.POSIXct("2023-11-06 05:00")
-end_time <- as.POSIXct("2023-11-06 23:00")
+start_time <- as.POSIXct("2023-11-07 05:00")
+end_time <- as.POSIXct("2023-11-07 23:00")
 
 
-plot_estimation(df_max, original_column = original_column, filename = "Example_Plot",
+plot_estimation(df_spline, original_column = original_column, filename = "Example_Plot",
                 start_time = start_time, end_time = end_time)
 
 #Save the dataframe replacing the data

@@ -1,3 +1,9 @@
+library(dplyr)
+library(lubridate)
+library(purrr)
+library(ggplot2)
+library(splines)
+
 load_data <- function(path){
   #Function for loading data from specified path 
   
@@ -42,7 +48,7 @@ max_estimation <- function(df, aggregation_period, columns_of_interest){
                                                          ~ {
                                                            
                                                            relevant_values <- df[[cur_column()]][
-                                                             timestamp >= (.x - minutes(floor(aggregation_period / 2))) & 
+                                                             timestamp > (.x - minutes(floor(aggregation_period / 2))) & 
                                                                timestamp < (.x + minutes(floor(aggregation_period / 2)))
                                                            ]
                                                            
@@ -74,7 +80,7 @@ rounded_mean_estimation <- function(df, aggregation_period, columns_of_interest)
                                                      ~ {
                                                        
                                                        relevant_values <- df[[cur_column()]][
-                                                         timestamp >= (.x - minutes(floor(aggregation_period / 2))) & 
+                                                         timestamp > (.x - minutes(floor(aggregation_period / 2))) & 
                                                            timestamp < (.x + minutes(floor(aggregation_period / 2)))
                                                        ]
                                                        
@@ -106,7 +112,7 @@ mean_estimation <- function(df, aggregation_period, columns_of_interest){
                                               ~ {
                                                 
                                                 relevant_values <- df[[cur_column()]][
-                                                  timestamp >= (.x - minutes(floor(aggregation_period / 2))) & 
+                                                  timestamp > (.x - minutes(floor(aggregation_period / 2))) & 
                                                     timestamp < (.x + minutes(floor(aggregation_period / 2)))
                                                 ]
                                                 
@@ -141,7 +147,7 @@ weighted_mean_estimation <- function(df, aggregation_period, columns_of_interest
                                                      ~ {
                                                        
                                                        relevant_values <- df[[cur_column()]][
-                                                         timestamp >= (.x - minutes(floor(aggregation_period / 2))) & 
+                                                         timestamp > (.x - minutes(floor(aggregation_period / 2))) & 
                                                            timestamp < (.x + minutes(floor(aggregation_period / 2)))
                                                        ]
                                                        
@@ -202,6 +208,37 @@ plot_estimation <- function(df, original_column = "RoomA.People__amount", save_d
   
   ggsave(filepath, plot = p, width = 10, height = 6, dpi = 300)
 }
+
+
+spline_mean_estimation <- function(df, aggregation_period, columns_of_interest) {
+  # Pesos definidos explícitamente para los 11 valores (5 antes, el momento exacto, y 5 después)
+  # Los pesos pueden ser, por ejemplo, distribuidos linealmente o de forma exponencial
+  fixed_weights <- c(0.03125, 0.0625, 0.125, 0.25, 0.5, 1, 0.5, 0.25, 0.125, 0.0625, 0.03125)
+  fixed_weights <- c(0.5, 0.6, 0.7, 0.8, 0.9, 1, 0.9, 0.8, 0.7, 0.6, 0.5)
+  fixed_weights <- fixed_weights / sum(fixed_weights)
+
+  
+  df_w <- df %>%
+    arrange(timestamp) %>%
+    mutate(across(all_of(columns_of_interest), 
+                  .fns = list(estimation = ~ map_dbl(timestamp, 
+                                                            ~ {
+                                                              # Filtrar los 11 valores alrededor del timestamp actual
+                                                              relevant_values <- df[[cur_column()]][
+                                                                timestamp > (.x - minutes(floor(aggregation_period / 2))) & 
+                                                                  timestamp < (.x + minutes(floor(aggregation_period / 2)))
+                                                              ]
+                                                              # Verificar que haya exactamente 11 valores
+                                                              if (length(relevant_values) == 11) {
+                                                                # Calcular la media ponderada usando los pesos definidos
+                                                                return(sum(relevant_values * fixed_weights, na.rm = TRUE))
+                                                              } else {
+                                                                return(NA)  # Si no hay exactamente 11 valores, retornar NA
+                                                              }
+                                                            })) ))
+  return(df_w)
+}
+
 
 save_df <- function(df, save_dir = "output/", df_name){
   #Function to save the dataframe, it replaces the data in the columns that have been estimated
