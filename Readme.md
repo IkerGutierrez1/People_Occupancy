@@ -23,7 +23,7 @@ ISSN 2352-3409,
 https://doi.org/10.1016/j.dib.2024.110326.
 
 
-## [smoothing approach]
+## Smoothing approach
 
 In the script there are functions to perform four different smoothing methods, all of them perform some operation with the values inside a time interval around the point:
 
