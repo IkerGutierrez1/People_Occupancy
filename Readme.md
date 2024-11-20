@@ -1,4 +1,4 @@
-# People Occupation data smoothing
+# People Occupation data smoothing and filling
 
 This repository contains a R project used for smoothing and filling of room occupation data. It includes the R scripts and the plots created to visualize the data.
 
